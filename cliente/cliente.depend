@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1724354824 source:c:\users\amans\onedrive\documentos\cliente\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<winsock2.h>
+
