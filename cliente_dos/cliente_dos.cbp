@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="cliente" />
+		<Option title="cliente_dos" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/cliente" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/cliente_dos" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -15,11 +15,11 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="../../../Downloads/WS2_32.Lib" />
+					<Add library="../../../../../Downloads/WS2_32.Lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/cliente" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/cliente_dos" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />

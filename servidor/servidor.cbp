@@ -15,7 +15,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="../../../Downloads/WS2_32.Lib" />
+					<Add library="../../../../../Downloads/WS2_32.Lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
