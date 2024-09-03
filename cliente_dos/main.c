@@ -18,12 +18,12 @@ int main() {
 
     printf("\nInicializando Winsock...\n");
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
-        printf("Error al inicializar Winsock. Código de error: %d", WSAGetLastError());
+        printf("Error al inicializar Winsock. Codigo de error: %d", WSAGetLastError());
         return 1;
     }
 
     if ((socket_cliente = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-        printf("Error al crear el socket. Código de error: %d", WSAGetLastError());
+        printf("Error al crear el socket. Codigo de error: %d", WSAGetLastError());
         WSACleanup();
         return 1;
     }
@@ -33,7 +33,7 @@ int main() {
     servidor.sin_port = htons(PUERTO);
 
     if (connect(socket_cliente, (struct sockaddr *)&servidor, sizeof(servidor)) < 0) {
-        printf("Error al conectar con el servidor. Código de error: %d", WSAGetLastError());
+        printf("Error al conectar con el servidor. Codigo de error: %d", WSAGetLastError());
         closesocket(socket_cliente);
         WSACleanup();
         return 1;
@@ -49,7 +49,7 @@ int main() {
         buffer[tam_recv] = '\0';
         printf("%s", buffer);
 
-        printf("Ingrese su elección: ");
+        printf("Ingrese su eleccion: ");
         scanf("%d", &eleccion);
         snprintf(buffer, TAM_BUF, "%d", eleccion);
         send(socket_cliente, buffer, strlen(buffer), 0);

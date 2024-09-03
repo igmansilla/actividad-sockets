@@ -50,7 +50,7 @@ void manejar_cliente(SOCKET socket_cliente) {
     int opcion, longitud;
 
     while (1) {
-        send(socket_cliente, "Seleccione una opción:\n1. Generar nombre de usuario\n2. Generar contraseña\n3. Salir\n", 75, 0);
+        send(socket_cliente, "Seleccione una opcion:\n1. Generar usuario\n2. Generar contrasenia\n3. Salir\n", 75, 0);
         int tam_recv = recv(socket_cliente, buffer, TAM_BUF, 0);
         if (tam_recv <= 0) {
             printf("Cliente desconectado.\n");
@@ -65,14 +65,14 @@ void manejar_cliente(SOCKET socket_cliente) {
             break;
         }
         if (opcion < 1 || opcion > 2) {
-            send(socket_cliente, "Opción no válida.\n", 18, 0);
+            send(socket_cliente, "Opcion no valida.\n", 18, 0);
             continue;
         }
 
         if (opcion == 1) {
-            send(socket_cliente, "Ingrese la longitud del nombre de usuario (5-15):\n", 50, 0);
+            send(socket_cliente, "Ingrese la longitud del nombre de usuario (5-15):", 50, 0);
         } else {
-            send(socket_cliente, "Ingrese la longitud de la contraseña (8-50):\n", 46, 0);
+            send(socket_cliente, "Ingrese la longitud de la contrasenia (8-50):", 46, 0);
         }
         tam_recv = recv(socket_cliente, buffer, TAM_BUF, 0);
         if (tam_recv <= 0) {
@@ -84,7 +84,7 @@ void manejar_cliente(SOCKET socket_cliente) {
         longitud = atoi(buffer);
 
         if ((opcion == 1 && (longitud < 5 || longitud > 15)) || (opcion == 2 && (longitud < 8 || longitud > 50))) {
-            send(socket_cliente, "Longitud no válida.\n", 19, 0);
+            send(socket_cliente, "Longitud no valida.\n", 19, 0);
             continue;
         }
 
@@ -93,7 +93,7 @@ void manejar_cliente(SOCKET socket_cliente) {
             snprintf(buffer, TAM_BUF, "Nombre de usuario: %s\n", nombre_usuario);
         } else {
             generar_contrasena(contrasena, longitud);
-            snprintf(buffer, TAM_BUF, "Contraseña: %s\n", contrasena);
+            snprintf(buffer, TAM_BUF, "Contrasenia: %s\n", contrasena);
         }
         send(socket_cliente, buffer, strlen(buffer), 0);
     }
@@ -107,14 +107,14 @@ int main() {
     struct sockaddr_in servidor, cliente;
     int c;
 
-    printf("\nInicializando Winsock...\n");
+    printf("\nInicializando socket...\n");
     if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {
-        printf("Error al inicializar Winsock. Código de error: %d", WSAGetLastError());
+        printf("Error al inicializar socket. Codigo de error: %d", WSAGetLastError());
         return 1;
     }
 
     if ((socket_servidor = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-        printf("Error al crear el socket. Código de error: %d", WSAGetLastError());
+        printf("Error al crear el socket. Codigo de error: %d", WSAGetLastError());
         WSACleanup();
         return 1;
     }
@@ -124,7 +124,7 @@ int main() {
     servidor.sin_port = htons(PUERTO);
 
     if (bind(socket_servidor, (struct sockaddr *)&servidor, sizeof(servidor)) == SOCKET_ERROR) {
-        printf("Error en bind. Código de error: %d", WSAGetLastError());
+        printf("Error en bind. Codigo de error: %d", WSAGetLastError());
         closesocket(socket_servidor);
         WSACleanup();
         return 1;
@@ -135,12 +135,12 @@ int main() {
     printf("Esperando conexiones entrantes...\n");
     c = sizeof(struct sockaddr_in);
     while ((socket_cliente = accept(socket_servidor, (struct sockaddr *)&cliente, &c)) != INVALID_SOCKET) {
-        printf("Conexión aceptada.\n");
+        printf("Conexion aceptada.\n");
         manejar_cliente(socket_cliente);
     }
 
     if (socket_cliente == INVALID_SOCKET) {
-        printf("Error en accept. Código de error: %d", WSAGetLastError());
+        printf("Error en accept. Codigo de error: %d", WSAGetLastError());
     }
 
     closesocket(socket_servidor);
